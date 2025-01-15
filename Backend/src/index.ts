@@ -42,15 +42,23 @@ async function startServer() {
     console.log('Database connection successful');
     
 
-    const createTableQuery = `
-      CREATE TABLE IF NOT EXISTS users (
+ const createTableQuery = `
+    CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
+        first_name VARCHAR(255) NOT NULL,
+        last_name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL,
+        role ENUM('ADMIN', 'CUSTOMER') NOT NULL,
+        email_verified BOOLEAN DEFAULT FALSE,
+        password VARCHAR(255),
+        verification_token VARCHAR(255),
+        otp VARCHAR(10),
+        otp_expiration TIMESTAMP,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-      );
-    `;
+    );
+`;
+
 
     await connection.query(createTableQuery);
     console.log('Users table ensured');
