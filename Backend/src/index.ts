@@ -4,7 +4,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import cors from 'cors';
 import http from 'http';
-import { pool } from './utils/connection'; // Ensure this imports your pool instance
+import { pool } from './utils/connection'; 
 import { authTypeDefs } from './modules/auth/auth.schema';
 import { authResolvers } from './modules/auth/auth.resolver';
 import { authMiddleware } from './middleware/auth.middleware';
